@@ -32,4 +32,5 @@
 	<classpathentry kind="lib" path="../dist/lib/j2objc_junit.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/J2ObjC annotations"/>
 	<classpathentry kind="output" path="build_result/eclipse"/>
+	<classpathentry kind="src" path="android-xalan"/>
 </classpath>
