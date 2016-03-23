@@ -15,7 +15,6 @@
  */
 
 package org.apache.harmony.xml.dom;
-import com.google.j2objc.annotations.Weak;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -66,7 +65,7 @@ public abstract class NodeImpl implements Node {
      * The containing document. This is non-null except for DocumentTypeImpl
      * nodes created by the DOMImplementation.
      */
-    @Weak DocumentImpl document;
+    DocumentImpl document;
 
     NodeImpl(DocumentImpl document) {
         this.document = document;
