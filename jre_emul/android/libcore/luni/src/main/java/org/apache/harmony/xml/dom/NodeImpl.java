@@ -15,6 +15,7 @@
  */
 
 package org.apache.harmony.xml.dom;
+import com.google.j2objc.annotations.Weak;
 
 import java.net.URI;
 import java.net.URISyntaxException;
