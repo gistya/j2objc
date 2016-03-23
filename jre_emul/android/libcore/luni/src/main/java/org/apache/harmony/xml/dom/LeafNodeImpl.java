@@ -35,8 +35,7 @@ import org.w3c.dom.Node;
 public abstract class LeafNodeImpl extends NodeImpl {
 
     // Maintained by InnerNodeImpl.
-    @Weak
-    InnerNodeImpl parent;
+    @Weak InnerNodeImpl parent;
 
     // Maintained by InnerNodeImpl.
     int index;

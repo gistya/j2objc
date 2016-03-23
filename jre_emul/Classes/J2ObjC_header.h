@@ -22,7 +22,7 @@
 
 CF_EXTERN_C_BEGIN
 
-id JreStrAppend(__weak id *lhs, const char *types, ...);
+id JreStrAppend(__unsafe_unretained id *lhs, const char *types, ...);
 id JreStrAppendStrong(__strong id *lhs, const char *types, ...);
 id JreStrAppendVolatile(volatile_id *lhs, const char *types, ...);
 id JreStrAppendVolatileStrong(volatile_id *lhs, const char *types, ...);
@@ -153,7 +153,7 @@ CF_EXTERN_C_END
   J2OBJC_STATIC_FIELD_BASIC_GETTER(CLASS, _##FIELD, TYPE)
 
 #define BOXED_INC_AND_DEC_INNER(CNAME, VALUE_METHOD, TYPE, OPNAME, OP) \
-  __attribute__((always_inline)) inline TYPE *JreBoxedPre##OPNAME##CNAME(__weak TYPE **value) { \
+  __attribute__((always_inline)) inline TYPE *JreBoxedPre##OPNAME##CNAME(__unsafe_unretained TYPE **value) { \
     nil_chk(*value); \
     return *value = TYPE##_valueOfWith##CNAME##_([*value VALUE_METHOD] OP 1); \
   } \
@@ -180,7 +180,7 @@ CF_EXTERN_C_END
     return IOSObjectArray_SetRef( \
         ref, TYPE##_valueOfWith##CNAME##_([*((TYPE **)ref.pValue) VALUE_METHOD] OP 1)); \
   } \
-  __attribute__((always_inline)) inline TYPE *JreBoxedPost##OPNAME##CNAME(__weak TYPE **value) { \
+  __attribute__((always_inline)) inline TYPE *JreBoxedPost##OPNAME##CNAME(__unsafe_unretained TYPE **value) { \
     nil_chk(*value); \
     TYPE *original = *value; \
     *value = TYPE##_valueOfWith##CNAME##_([*value VALUE_METHOD] OP 1); \
@@ -258,7 +258,7 @@ CF_EXTERN_C_END
 #define BOXED_COMPOUND_ASSIGN( \
     CNAME, VALUE_METHOD, TYPE, BOXED_TYPE, RTYPE, OPNAME, OP, OP_LTYPE) \
   __attribute__((always_inline)) inline BOXED_TYPE *JreBoxed##OPNAME##Assign##CNAME( \
-      __weak BOXED_TYPE **lhs, RTYPE rhs) { \
+      __unsafe_unretained BOXED_TYPE **lhs, RTYPE rhs) { \
     nil_chk(*lhs); \
     return *lhs = BOXED_TYPE##_valueOfWith##CNAME##_( \
         (TYPE)(OP((OP_LTYPE)[*lhs VALUE_METHOD], rhs))); \
