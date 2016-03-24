@@ -19,6 +19,7 @@
  * $Id: ElemContext.java 468654 2006-10-28 07:09:23Z minchau $
  */
 package org.apache.xml.serializer;
+import com.google.j2objc.annotations.Weak;
 
 /**
  * This class is a stack frame that consists of 
@@ -106,7 +107,7 @@ final class ElemContext
     private ElemContext m_next;
 
     /** The previous element "stack frame". */
-    final ElemContext m_prev;
+    @Weak final ElemContext m_prev;
 
     /**
      * Set to true when a start tag is started, or open, but not all the
