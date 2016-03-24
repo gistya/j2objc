@@ -94,6 +94,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.ext.LexicalHandler;
+import com.google.j2objc.annotations.Weak;
 
 /**
  * This class implements the
@@ -123,7 +124,7 @@ public class TransformerImpl extends Transformer
   private String m_urlOfSource = null;
 
   /** The Result object at the start of the transform, if any. */
-  private Result m_outputTarget = null;
+  @Weak private Result m_outputTarget = null;
 
   /**
    * The output format object set by the user.  May be null.
