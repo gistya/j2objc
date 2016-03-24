@@ -191,7 +191,7 @@ final class CharInfo
             try {
                 // Load entity property files by using PropertyResourceBundle,
                 // cause of security issure for applets
-                entities = PropertyResourceBundle.getBundle(entitiesResource);
+                entities = PropertyResourceBundle.getPropertyBundle(entitiesResource);
             } catch (Exception e) {}
         }
 
