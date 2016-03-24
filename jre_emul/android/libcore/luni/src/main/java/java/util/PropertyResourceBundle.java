@@ -47,12 +47,12 @@ public class PropertyResourceBundle extends ResourceBundle {
      * @throws MissingResourceException
      *                if the {@code ResourceBundle} cannot be found.
      */
-    public static ResourceBundle getPropertyBundle(String bundleName) throws MissingResourceException {
+    public static ResourceBundle getBundle(String bundleName) throws MissingResourceException {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         if (classLoader == null) {
             classLoader = getLoader();
         }
-        return getPropertyBundle(bundleName, Locale.getDefault(), classLoader);
+        return getBundle(bundleName, Locale.getDefault(), classLoader);
     }
 
     /**
@@ -104,7 +104,7 @@ public class PropertyResourceBundle extends ResourceBundle {
      * @throws MissingResourceException
      *                if the {@code ResourceBundle} cannot be found.
      */
-    public static ResourceBundle getPropertyBundle(String bundleName, Locale locale,
+    public static ResourceBundle getBundle(String bundleName, Locale locale,
                                            ClassLoader loader) throws MissingResourceException {
         if (loader == null) {
             throw new NullPointerException("loader == null");
@@ -118,10 +118,10 @@ public class PropertyResourceBundle extends ResourceBundle {
         }
         ResourceBundle bundle = null;
         if (!locale.equals(defaultLocale)) {
-            bundle = handleGetPropertyBundle(false, bundleName, locale, loader);
+            bundle = handleGetBundle(false, bundleName, locale, loader);
         }
         if (bundle == null) {
-            bundle = handleGetPropertyBundle(true, bundleName, defaultLocale, loader);
+            bundle = handleGetBundle(true, bundleName, defaultLocale, loader);
             if (bundle == null) {
                 throw missingResourceException(bundleName + '_' + locale, "");
             }
@@ -166,7 +166,7 @@ public class PropertyResourceBundle extends ResourceBundle {
      *  bother trying to load as a class first, needlessly throwing exceptions every time we
      *  intend to open a .properties file.
      */
-    private static ResourceBundle handleGetPropertyBundle(boolean loadBase, String base, Locale locale,
+    private static ResourceBundle handleGetBundle(boolean loadBase, String base, Locale locale,
                                                   ClassLoader loader) {
         String localeName = locale.toString();
         String bundleName = localeName.isEmpty()
@@ -186,7 +186,7 @@ public class PropertyResourceBundle extends ResourceBundle {
                 if (newLocale == null) {
                     return null;
                 }
-                return handleGetPropertyBundle(loadBase, base, newLocale, loader);
+                return handleGetBundle(loadBase, base, newLocale, loader);
             }
             return cached;
         }
@@ -210,7 +210,7 @@ public class PropertyResourceBundle extends ResourceBundle {
         Locale strippedLocale = strip(locale);
         if (bundle != null) {
             if (strippedLocale != null) {
-                ResourceBundle parent = handleGetPropertyBundle(loadBase, base, strippedLocale, loader);
+                ResourceBundle parent = handleGetBundle(loadBase, base, strippedLocale, loader);
                 if (parent != null) {
                     bundle.setParent(parent);
                 }
@@ -220,7 +220,7 @@ public class PropertyResourceBundle extends ResourceBundle {
         }
 
         if (strippedLocale != null && (loadBase || !strippedLocale.toString().isEmpty())) {
-            bundle = handleGetPropertyBundle(loadBase, base, strippedLocale, loader);
+            bundle = handleGetBundle(loadBase, base, strippedLocale, loader);
             if (bundle != null) {
                 loaderCache.put(bundleName, bundle);
                 return bundle;
