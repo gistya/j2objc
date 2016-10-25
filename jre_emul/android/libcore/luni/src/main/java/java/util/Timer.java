@@ -16,6 +16,7 @@
  */
 
 package java.util;
+import com.google.j2objc.annotations.Weak;
 
 /**
  * Timers schedule one-shot or recurring {@link TimerTask tasks} for execution.
@@ -321,7 +322,7 @@ public class Timer {
     }
 
     private static final class FinalizerHelper {
-        private final TimerImpl impl;
+        @Weak private final TimerImpl impl;
 
         FinalizerHelper(TimerImpl impl) {
             this.impl = impl;

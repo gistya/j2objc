@@ -18,7 +18,6 @@
 package java.lang;
 
 import com.google.j2objc.annotations.Weak;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +47,7 @@ public class Thread implements Runnable {
    * The associated native NSThread instance.  Other instance data is stored
    * in the thread dictionary to reduce property lookup overhead.
    */
-  private Object nsThread;
+  @Weak private Object nsThread;
   /** Android source declares this as the native VMThread class. */
   private final Object vmThread = new Object();
   private boolean isDaemon;
@@ -61,8 +60,7 @@ public class Thread implements Runnable {
   /** The object the thread is waiting on (normally null). */
   Object blocker;
 
-  @Weak
-  private ThreadGroup threadGroup;
+  @Weak private ThreadGroup threadGroup;
 
   /** the park state of the thread */
   private int parkState = ParkState.UNPARKED;

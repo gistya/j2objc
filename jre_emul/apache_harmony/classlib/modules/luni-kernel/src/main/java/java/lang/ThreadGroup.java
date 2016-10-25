@@ -16,6 +16,7 @@
  */
 
 package java.lang;
+import com.google.j2objc.annotations.Weak;
 
 /**
  * A {@code ThreadGroup} is a means of organizing {@link Thread}s into a
@@ -50,7 +51,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
     private int maxPriority = Thread.MAX_PRIORITY;
 
     // The ThreadGroup to which this ThreadGroup belongs
-    ThreadGroup parent;
+    @Weak ThreadGroup parent;
 
     int numThreads;
 
