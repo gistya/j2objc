@@ -94,7 +94,7 @@ endif
 endif
 DEBUGFLAGS := $(DEBUGFLAGS) -O$(OPTIMIZATION_LEVEL)
 
-CC_WARNINGS = -Wall -Werror -Wshorten-64-to-32 \
+CC_WARNINGS = -std=c11 -Wall -Wshorten-64-to-32 \
   -Wmissing-field-initializers -Wno-unused-variable
 
 ifdef GCC_PREPROCESSOR_DEFINITIONS
